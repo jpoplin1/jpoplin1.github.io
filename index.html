@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>Pitch Stats</title>
+    <link rel="stylesheet" href="styles.css"></link>
+  </head>
+  <body>
+    <h1 class="red">Trackman Pitch Stats Viewer</h1>
+    <form onsubmit="downloadData();">
+      <label>Starting Date</label>
+      <input type="date" id="startdate" />
+      <label>Endding date</label>
+      <input type="date" id="enddate" />
+      <button>Filter</button>
+    </form>
+    <table class="blue">
+      <tr>
+        <th>PitchNo</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Batter</th>
+        <th>Balls</th>
+        <th>Strikes</th>
+        <th>Outs</th>
+        <th>PitchCall</th>
+        <th>KorBB</th>
+        <th>RelSpeed</th>
+        <th>SpinRate</th>
+        <th>SpinAxis</th>
+      </tr>
+      <tr>
+        <td><a href="details.html">Pitch 12345</a></td>
+        <td>2024-10-09</td>
+        <td>16:00:00</td>
+        <td>John Smith</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>K</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="details.html">Pitch 12346</a></td>
+        <td>2024-10-09</td>
+        <td>16:00:45</td>
+        <td>John Smith</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>K</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="details.html">Pitch 12347</a></td>
+        <td>2024-10-09</td>
+        <td>16:01:30</td>
+        <td>John Smith</td>
+        <td>0</td>
+        <td>2</td>
+        <td>0</td>
+        <td>K</td>
+        <td>K</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <script src="script.js"></script>
+  </body>
+</html>
