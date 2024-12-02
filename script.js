@@ -1,4 +1,3 @@
-
 async function fetchData() {
   try {
     const response = await fetch("https://compute.samford.edu/zohauth/clients/datajson/1");
@@ -16,10 +15,12 @@ function updateTable(data) {
   const tableBody = document.getElementById("pitchTableBody");
   tableBody.innerHTML = ""; // Clear any existing rows
 
+  // Save the pitch data as rows in the table
   data.forEach((pitch) => {
     const row = document.createElement("tr");
+    row.dataset.date = pitch.Date; // Save the pitch date in a data attribute
 
-    innerHTML = 
+    row.innerHTML = `
       <td><a href="details.html?pitch=${pitch.PitchNo}">Pitch ${pitch.PitchNo}</a></td>
       <td>${pitch.Date}</td>
       <td>${pitch.Time}</td>
@@ -34,7 +35,6 @@ function updateTable(data) {
       <td>${pitch.SpinAxis}</td>
     `;
 
-    // Append the row to the table body
     tableBody.appendChild(row);
   });
 }
@@ -46,16 +46,28 @@ function filterData(event) {
   const startDate = document.getElementById("startdate").value;
   const endDate = document.getElementById("enddate").value;
 
-  if (startDate && endDate) {
-    fetchData().then((data) => {
-      const filteredData = data.filter((pitch) => {
-        const pitchDate = new Date(pitch.Date);
-        return pitchDate >= new Date(startDate) && pitchDate <= new Date(endDate);
-      });
-      updateTable(filteredData);
-    });
-  } else {
-    fetchData(); // If no dates are provided, show all data
+  const tableBody = document.getElementById("pitchTableBody");
+  const rows = tableBody.getElementsByTagName("tr"); // Get all rows in the table body
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const rowDate = new Date(row.dataset.date);
+
+    // Check if the row date is within the selected range
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      // If the row date is outside the range, hide the row
+      if (rowDate < start || rowDate > end) {
+        row.style.display = "none";
+      } else {
+        row.style.display = ""; // Show the row if it's within the range
+      }
+    } else {
+      // If no dates are provided, show all rows
+      row.style.display = "";
+    }
   }
 }
 
